@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->text('description_service');
             $table->string('id_type_service');
             $table->string('slug_type_service');
+            $table->string('is_deleted')->default('0');
             $table->timestamps();
         });
     }
