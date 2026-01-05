@@ -15,8 +15,9 @@ class CreateTypeServicesTable extends Migration
     {
         Schema::create('type_services', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle_service');
-            $table->string('slug_service');
+            $table->string('libelle_type_service');
+            $table->string('slug_type_service');
+            $table->string('is_deleted')->default('0');
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ class CreateTypeProjetsTable extends Migration
             $table->id();
             $table->string('libelle_type_projet');
             $table->string('slug_type_projet');
+            $table->string('is_deleted')->default('0');
             $table->timestamps();
         });
     }
