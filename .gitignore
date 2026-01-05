@@ -1,0 +1,12 @@
+.env
+vendor
+/node_modules
+.DS_Store
+/build
+/dist
+*.log
+.idea
+.vscode
+*.iml
+*.class
+*.jar

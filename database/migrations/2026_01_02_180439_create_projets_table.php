@@ -27,6 +27,7 @@ class CreateProjetsTable extends Migration
             $table->string('temps');
             $table->string('phrase_acceroche');
             $table->string('slug_service');
+            $table->string('is_deleted')->default('0');
             $table->timestamps();
         });
     }
