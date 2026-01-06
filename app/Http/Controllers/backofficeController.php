@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class backofficeController extends Controller
+class BackofficeController extends Controller
 {
-    //
-    public function connexion(){
-        return view('backoffice.connexion');
+    public function index()
+    {
+        return view('backoffice.index');
     }
 }
