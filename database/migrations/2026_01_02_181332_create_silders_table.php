@@ -15,6 +15,10 @@ class CreateSildersTable extends Migration
     {
         Schema::create('silders', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->string('image')->nullable();
+            $table->string('lnk')->nullable();
             $table->timestamps();
         });
     }

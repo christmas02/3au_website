@@ -23,6 +23,7 @@ class CreateAcceuilsTable extends Migration
             $table->text('description_section_two')->nullable();
             $table->string('signature_image_path')->nullable();
             $table->string('nom_signataire')->nullable();
+            $table->string('image_directeur')->nullable();
             $table->timestamps();
         });
     }
