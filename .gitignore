@@ -13,3 +13,13 @@ storage/framework/sessions/
 storage/framework/views/
 storage/logs/
 uploads/ 
+/build
+/dist
+.vscode
+*.iml
+*.class
+*.jar
+*.war
+*.exe
+composer.lock
+package-lock.json
