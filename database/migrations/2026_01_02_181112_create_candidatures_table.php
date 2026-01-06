@@ -18,6 +18,7 @@ class CreateCandidaturesTable extends Migration
             $table->string('datata_candidat');
             $table->string('cv');
             $table->string('id_offre');
+            $table->string('is_read')->default('0');
             $table->timestamps();
         });
     }
