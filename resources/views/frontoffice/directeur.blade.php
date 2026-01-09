@@ -14,7 +14,6 @@
                     </div>
                 </div>
                 <!-- BREADCRUMB ROW -->
-
                 <!-- BREADCRUMB ROW END -->
             </div>
         </div>
@@ -49,35 +48,12 @@
                                                 <div class="sep-leaf-right"></div>
                                             </div>
                                         </div>
-                                        <h2>Chers clients et partenaires,</h2>
-                                        <p>
-                                            Au nom de l'Agence Africaine d'Aménagement et d'Urbanisme (3AU), nous 
-                                            tenons à vous remercier pour votre confiance et votre fidélité au fil des années. 
-                                            Depuis sa création en 1999, notre agence s'est engagée à offrir des solutions innovantes, 
-                                            durables et adaptées aux besoins de nos clients en matière d'aménagement et d'urbanisme.
-                                        </p>
-                                        <p>
-                                            Nous sommes fiers de dire que notre agence a su se positionner comme un acteur majeur 
-                                            du secteur de l'aménagement et de l'urbanisme en Côte d'Ivoire et dans la sous-région. 
-                                            Cela n'aurait pas été possible sans le soutien et la collaboration de nos clients et 
-                                            partenaires, ainsi que la passion et l'expertise de notre équipe.
-                                        </p>
-                                        <p>
-                                            Nous sommes convaincus que l'aménagement et l'urbanisme sont des enjeux majeurs pour 
-                                            le développement économique et social de l'Afrique. C'est pourquoi nous avons à cœur de 
-                                            contribuer à la création de villes plus durables, inclusives et attractives pour les 
-                                            générations présentes et futures.
-                                        </p>
-                                        <p>
-                                            Nous tenons à vous assurer que notre agence s'est rendue à travailler avec professionnalisme, 
-                                            rigueur et engagement pour répondre à vos besoins et pour vous accompagner dans la réalisation 
-                                            de vos projets. Nous sommes impatients de continuer cette collaboration fructueuse et nous vous 
-                                            remercions encore une fois pour votre confiance.
-                                        </p>
+                                        <h2>{!! $data->sous_titre_section_two !!}</h2>
+                                        {!! $data->contenue_section_two !!}
 
                                         <div class="welcom-to-section-bottom d-flex justify-content-between">
                                             <div class="welcom-sign-pic"><img src="assets/images/sign.png" alt=""></div>
-                                            <div class="welcom-sign-info"><strong>M. BAHOU Abou  Stéphane</strong><span>( CEO &amp; Founder )</span>
+                                            <div class="welcom-sign-info"><strong>{!! $data->nom_signataire !!}</strong>
                                             </div>
                                         </div>
                                     </div>

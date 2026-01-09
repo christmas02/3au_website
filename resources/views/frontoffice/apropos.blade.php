@@ -33,7 +33,7 @@
                         <div>Le Cabinet 3AU</div>
                         <div class="sep-leaf-right"></div>
                     </div>
-                    <h3>L’Agence Africaine d’Aménagement et d’Urbanisme (3AU)!</h3>
+                    <h3>{!! $data->sous_titre_section_one !!}</h3>
                 </div>
                 <!-- TITLE END-->
 
@@ -48,41 +48,7 @@
                                     <span class="s-title-two">3AU</span>
                                 </div>
                                 <div class="service-box-content">
-                                    <p>
-                                        Bienvenue sur le site web de l'Agence Africaine d'Aménagement et d'Urbanisme (3AU), 
-                                        votre partenaire de choix pour tous vos projets d'aménagement et d'urbanisme en Côte 
-                                        d'Ivoire et dans la sous-région.
-                                    </p>
-                                    <p>
-                                        Fondée en janvier 1999 sous le Registre de Commerce n° CI-ABJ-1999-A-234.097 et le 
-                                        Compte Contribuable N°9905593 S, la 3AU a obtenu de l'expertise du Bureau d'Urbanisme 
-                                        Conseil (BUC) de feu RENAUD Duquenne , Urbaniste. sa création, notre agence s'est engagée 
-                                        à proposer des solutions innovantes, durables et adaptées aux besoins de ses clients.
-                                    </p>
-                                    <p>
-                                        Aujourd'hui, la 3AU est dirigée par Monsieur BAHOU Abou Stéphane, Urbaniste agréé inscrit 
-                                        au tableau de l'Ordre National des Urbanistes de Côte d'Ivoire sous le N°009/99/ONUCI. 
-                                        Fort de son expérience et de son expertise en matière d'aménagement et d'urbanisme, 
-                                        Monsieur BAHOU Abou Stéphane a su insuffler à l'agence une dynamique de croissance et de développement continu.
-                                    </p>
-                                    <p>
-                                        Notre agence est située à Abidjan dans la commune de Cocody, plus précisément aux 
-                                        II-Plateaux Carrefour « DUNCAN ». Nous sommes logés dans les Résidences SICOGI Latrille, 
-                                        bâtiment A Porte 8, 2ème étage. Cette situation géographique stratégique nous permet d'être 
-                                        facilement accessible et de travailler efficacement avec nos clients, qu'ils soient à Abidjan ou 
-                                        dans d'autres villes de la région.
-                                    </p>
-                                    <p>
-                                        À la 3AU, nous sommes convaincus que l'aménagement et l'urbanisme sont des enjeux majeurs 
-                                        pour le développement économique et social de la Côte d'Ivoire et de l'Afrique en général. 
-                                        Nous sommes donc fiers de mettre notre expertise et notre savoir-faire au service de nos 
-                                        clients pour les accompagner dans la réalisation de leurs projets et contribuer à la création 
-                                        de villes plus durables, inclusives et attractives.
-                                    </p>
-                                    <p>
-                                        N'hésitez pas à nous contacter pour en savoir plus sur nos services et nos réalisations. 
-                                        Nous serons ravis de vous accompagner dans votre projet d'aménagement et d'urbanisme.
-                                    </p>
+                                    {!! $data->contenue_section_one !!}
                                     <a href="/contact" class="site-button-link">Contactez nous</a>
                                 </div>
 
