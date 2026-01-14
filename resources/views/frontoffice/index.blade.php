@@ -192,17 +192,9 @@
                                     <div class="sep-leaf-right"></div>
                                 </div>
                             </div>
-                            <h2>3AU en quelque mots</h2>
+                            <h2>{!! $data->titre_section_one !!}</h2>
                             <!-- TITLE END-->
-                            <p>
-                                L’Agence Africaine d’Aménagement et d’Urbanisme (3AU) a été créée en janvier 1999 sous
-                                le Registre de Commerce n° CI-ABJ-1999-A-234.097 et le Compte Contribuable N°9905593 S.
-                                Elle a hérité de l’expérience du Bureau d’Urbanisme Conseil (BUC) de feu RENAUD Duquenne, Urbaniste.
-                            </p>
-                            <p>
-                                3AU est actuellement dirigée par Monsieur BAHOU Abou Stéphane, Urbaniste agréé inscrit au
-                                tableau de l’Ordre National des Urbanistes de Côte d’Ivoire sous le N°009/99/ONUC
-                            </p>
+                            {!! $data->description_section_one !!}
                         </div>
                         <hr>
                         <div class="welcom-to-section-bottom d-flex justify-content-between">
@@ -240,30 +232,11 @@
                                     <div class="sep-leaf-right"></div>
                                 </div>
                             </div>
-                            <h2>Mot du directeur</h2>
+                            <h2>{!! $data->titre_section_two !!}</h2>
                             <!-- TITLE END-->
 
-
-                            <p>
-                                Chers visiteurs,<br>
-                                Il m’est agréable de vous souhaiter la bienvenue, en mon nom et au nom du personnel
-                                de l'Agence Urbaine 3AU, au sein de cette nouvelle version du site
-                                web de notre établissement.
-                            </p>
-
-                            <p>
-                                Forte de ses valeurs de transparence et d’ouverture, l’Agence Urbaine 3AU
-                                s’est lancée cette année, avec le soutien d’experts en nouvelles technologies de l’information
-                                et de communication, dans le réaménagement de son site web de sorte à permettre aux acteurs
-                                de l’urbanisme et aux  citoyens un accès facile à l’information et une bonne imprégnation
-                                des projets qui concernent leurs territoires respectifs. C’est d’autant plus vrai que
-                                le processus de numérisation des services publics est un enjeu gouvernemental en ce
-                                qu’il permet un accompagnement efficace  des acteurs et des citoyens en leur offrant
-                                des prestations de qualité.
-                            </p>
-
-
-
+                            {!! $data->description_section_two !!}
+                            <hr>
                             <div class="welcom-to-section-bottom d-flex justify-content-between">
                                 <div class="welcom-btn-position"><a href="/directeur" class="site-button-secondry site-btn-effect">lire plus </a></div>
                             </div>

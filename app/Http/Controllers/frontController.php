@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Acceuil;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     //
-
     public function index()
     {
-        return view('frontoffice.index');
+        $data = Acceuil::findAll();
+        //dd($data);
+        return view('frontoffice.index', ['data' => $data]);
     }
 
     public function suiviDossier()
@@ -41,13 +43,15 @@ class FrontController extends Controller
     //Qui sommes nous
     public function apropos()
     {
-        return view('frontoffice.apropos');
+        $data = Acceuil::findAll();
+        return view('frontoffice.apropos', ['data' => $data]);
     }
 
     //Mot du directeur
     public function directeur()
     {
-        return view('frontoffice.directeur');
+        $data = Acceuil::findAll();
+        return view('frontoffice.directeur', ['data' => $data]);
     }
 
     // les services

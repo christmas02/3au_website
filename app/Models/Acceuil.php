@@ -16,9 +16,11 @@ class Acceuil extends Model
             $accueil->titre_section_one  =  $data['titre_section_one'];
             $accueil->sous_titre_section_one  =  $data['sous_titre_section_one'];
             $accueil->description_section_one =  $data['description_section_one'];
+            $accueil->contenue_section_one =  $data['description_section_one'];
             $accueil->titre_section_two  =  $data['titre_section_two'];
             $accueil->sous_titre_section_two =  $data['sous_titre_section_two'];
             $accueil->description_section_two  =  $data['description_section_two'];
+            $accueil->contenue_section_two =  $data['description_section_one'];
             $accueil->signature_image_path  =  $data['signature_image_path'];
             $accueil->nom_signataire =  $data['nom_signataire'];
             $accueil->save();
@@ -30,7 +32,7 @@ class Acceuil extends Model
 
     public static function findAll()
     {
-        return Acceuil::all();
+        return Acceuil::find('1');
     }
 
     public static function updated($data)
