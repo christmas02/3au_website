@@ -16,11 +16,11 @@ class Acceuil extends Model
             $accueil->titre_section_one  =  $data['titre_section_one'];
             $accueil->sous_titre_section_one  =  $data['sous_titre_section_one'];
             $accueil->description_section_one =  $data['description_section_one'];
-            $accueil->contenue_section_one =  $data['description_section_one'];
+            $accueil->contenue_section_one =  $data['contenue_section_one'];
             $accueil->titre_section_two  =  $data['titre_section_two'];
             $accueil->sous_titre_section_two =  $data['sous_titre_section_two'];
             $accueil->description_section_two  =  $data['description_section_two'];
-            $accueil->contenue_section_two =  $data['description_section_one'];
+            $accueil->contenue_section_two =  $data['contenue_section_two'];
             $accueil->signature_image_path  =  $data['signature_image_path'];
             $accueil->nom_signataire =  $data['nom_signataire'];
             $accueil->save();

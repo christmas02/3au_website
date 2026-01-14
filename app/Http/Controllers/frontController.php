@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Acceuil;
 use Illuminate\Http\Request;
 
-class frontController extends Controller
+class FrontController extends Controller
 {
     //
     public function index()
