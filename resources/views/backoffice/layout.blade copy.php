@@ -341,19 +341,20 @@
 <!-- Page specific script -->
 <script>
     $(function() {
-        // Initialisation de tous les éditeurs ayant la classe .summernote
-        $('.summernote').summernote({
-            height: 400, 
-            focus: false,
-            placeholder: 'Écrivez votre contenu ici...',
+
+        $('#summernote').summernote({
+            height: 500, // Hauteur de l'éditeur
+            focus: true,
+            placeholder: 'Écrivez ici...',
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'italic', 'underline', 'clear']],
                 ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
+                ['fontsize', ['fontsize']], // Ajout de la taille de police
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
+                ['table', ['table']], // Gestion des tableaux
+                ['float', ['floatLeft', 'floatRight', 'floatNone']],
                 ['insert', ['link', 'picture', 'videoUpload', 'videoExterne', 'pdfUpload']],
                 ['view', ['fullscreen', 'codeview', 'help']]
             ],
@@ -361,104 +362,126 @@
             buttons: {
                 pdfUpload: function(context) {
                     var ui = $.summernote.ui;
-                    return ui.button({
-                        contents: '<i class="ri-file-pdf-line"/> PDF',
-                        tooltip: 'Télécharger un PDF',
-                        click: function() { $('#pdfInput').trigger('click'); }
-                    }).render();
+                    var button = ui.button({
+                        contents: '<i class="note-icon-book"/> PDF',
+                        click: function() {
+                            $('#pdfInput').trigger('click');
+                        }
+                    });
+                    return button.render();
                 },
                 videoUpload: function(context) {
                     var ui = $.summernote.ui;
-                    return ui.button({
-                        contents: '<i class="ri-video-upload-line"/> Vidéo',
-                        tooltip: 'Uploader une vidéo',
-                        click: function() { $('#videoInput').trigger('click'); }
-                    }).render();
+                    var button = ui.button({
+                        contents: '<i class="note-icon-video"/> Vidéo',
+                        click: function() {
+                            $('#videoInput').trigger('click');
+                        }
+                    });
+                    return button.render();
                 },
                 videoExterne: function(context) {
                     var ui = $.summernote.ui;
-                    return ui.button({
-                        contents: '<i class="ri-youtube-line"/> Vidéo Web',
-                        tooltip: 'Lien YouTube ou Direct',
+                    var button = ui.button({
+                        contents: '<i class="note-icon-video"/> Vidéo Web',
                         click: function() {
-                            var videoURL = prompt("Entrez l'URL de la vidéo (YouTube ou lien direct) :");
-                            if (videoURL) embedVideo(videoURL, context);
+                            var videoURL = prompt("Entrez l'URL de la vidéo :");
+                            if (videoURL) {
+                                embedVideo(videoURL);
+                            }
                         }
-                    }).render();
+                    });
+                    return button.render();
                 }
             },
             callbacks: {
                 onInit: function() {
-                    // Création unique des inputs cachés s'ils n'existent pas
-                    if (!$('#pdfInput').length) {
-                        $('body').append('<input type="file" id="pdfInput" style="display:none" accept=".pdf,.doc,.docx"/>');
-                        $('body').append('<input type="file" id="videoInput" style="display:none" accept="video/*"/>');
-                    }
+                    // Inputs cachés pour le téléchargement de fichiers
+                    $('body').append('<input type="file" id="pdfInput" style="display:none" accept=".pdf,.doc,.docx"/>');
+                    $('body').append('<input type="file" id="videoInput" style="display:none" accept="video/*"/>');
+                    $('body').append('<input type="file" id="videoExterne" style="display:none" accept="video/*"/>');
 
-                    $('#pdfInput').off('change').on('change', function() {
-                        if (this.files[0]) uploadFile(this.files[0], 'pdf');
+                    $('#pdfInput').on('change', function() {
+                        var file = this.files[0];
+                        if (file) {
+                            uploadPdf(file);
+                        }
                     });
 
-                    $('#videoInput').off('change').on('change', function() {
-                        if (this.files[0]) uploadFile(this.files[0], 'video');
+                    $('#videoInput').on('change', function() {
+                        var file = this.files[0];
+                        if (file) {
+                            uploadVideo(file);
+                        }
                     });
                 }
             }
         });
 
-        // Fonction générique d'upload pour plus de scalabilité
-        function uploadFile(file, type) {
+        // Fonction pour upload PDF
+        function uploadPdf(file) {
             var data = new FormData();
             data.append('file', file);
             data.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-            var url = (type === 'pdf') ? '/upload-pdf' : '/upload-video';
-
             $.ajax({
-                url: url,
+                url: '/upload-pdf',
                 method: 'POST',
                 data: data,
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    let html = '';
-                    if (type === 'pdf') {
-                        html = '<a href="' + response.file_url + '" target="_blank" class="btn btn-sm btn-danger">📄 Télécharger le document</a>';
-                    } else {
-                        html = '<video controls width="100%"><source src="' + response.file_url + '" type="video/mp4"></video>';
-                    }
-                    // On insère dans l'éditeur actif
-                    $('.summernote').summernote('pasteHTML', html);
+                    $('#summernote').summernote('pasteHTML', '<a href="' + response.file_url + '" target="_blank">Télécharger le PDF</a>');
                 },
-                error: function() { alert("Erreur lors de l'upload."); }
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de l'upload du fichier: ", errorThrown);
+                }
             });
         }
 
-        function embedVideo(videoURL, context) {
+        // Fonction pour upload Vidéo
+        function uploadVideo(file) {
+            var data = new FormData();
+            data.append('file', file);
+            data.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+            $.ajax({
+                url: '/upload-video', // Remplacez avec votre route de backend pour l'upload de vidéos
+                method: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#summernote').summernote('pasteHTML', '<video controls width="320"><source src="' + response.file_url + '" type="video/mp4">Votre navigateur ne supporte pas l\'élément vidéo.</video>');
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Erreur lors de l'upload de la vidéo: ", errorThrown);
+                }
+            });
+        }
+
+        /// Fonction pour intégrer une vidéo Web
+        function embedVideo(videoURL) {
             let videoEmbedHTML = '';
             if (videoURL.includes('youtube.com') || videoURL.includes('youtu.be')) {
+                // Intégration pour YouTube
                 const videoID = videoURL.split('v=')[1] || videoURL.split('youtu.be/')[1];
                 if (videoID) {
-                    videoEmbedHTML = '<div class="ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/' + videoID + '" allowfullscreen></iframe></div>';
+                    videoEmbedHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoID + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 }
             } else if (videoURL.match(/\.(mp4|webm|ogg)$/i)) {
-                videoEmbedHTML = '<video controls width="100%"><source src="' + videoURL + '" type="video/mp4"></video>';
+                // Intégration pour liens directs vers des fichiers vidéo
+                videoEmbedHTML = '<video controls width="320"><source src="' + videoURL + '" type="video/mp4">Votre navigateur ne supporte pas l\'élément vidéo.</video>';
+            } else {
+                alert("URL de vidéo non prise en charge. Utilisez un lien direct vers un fichier vidéo ou YouTube.");
             }
 
+            // Insérer le code HTML de la vidéo dans Summernote
             if (videoEmbedHTML) {
-                $('.summernote').summernote('pasteHTML', videoEmbedHTML);
+                $('#summernote').summernote('pasteHTML', videoEmbedHTML);
             }
         }
     });
-
-    // Preview simple pour les images classiques (photo DG / Signature)
-    function previewImg(input, id) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) { $('#' + id).attr('src', e.target.result); }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
 </script>
 
 </html>

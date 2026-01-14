@@ -65,6 +65,15 @@ Route::group(['middleware' => 'auth'], function () {
         ->controller(BackofficeController::class)
         ->group(function () {
             Route::get('espace', 'index')->name('espace');
+            Route::get('accueil', 'accueil')->name('accueil');
+            Route::get('ajout/contenu', 'ajoutContenu')->name('ajoutContenu');
+            Route::post('enregistrer/article', 'enregistrerArticle')->name('enregistrer.article');
+            Route::get('detail_article/{id}', 'detailArticle')->name('detail.article'); 
+
+            Route::get('slider', 'slider')->name('slider');
+            Route::post('enregistrer/slide', 'enregistrerSlide')->name('enregistrerSlide');
+            Route::get('detailSlide/{id}', 'detailSlide')->name('detailSlide');
+            Route::post('updateSlide/{id}', 'updateSlide')->name('updateSlide');
 
         });
 });

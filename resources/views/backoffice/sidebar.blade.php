@@ -51,7 +51,7 @@
                         <ul class="nav nav-sm flex-column">
                             
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-alerts">Acceuil</a>
+                                <a href="{{ route('backoffice.accueil') }}" class="nav-link {{ request()->routeIs('backoffice.accueil') ? 'active' : '' }}" data-key="t-alerts">Accueil</a>
                                 <a href="#" class="nav-link" data-key="t-alerts">Services</a>
                                 <a href="#" class="nav-link" data-key="t-alerts">Projets</a>
                                 <a href="#" class="nav-link" data-key="t-alerts">Carrieres</a>
