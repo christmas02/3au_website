@@ -56,7 +56,7 @@ class BackofficeController extends Controller
     public function enregistrerSlide(Request $request)
     {
         try {
-     
+
             // Gestion du téléchargement de l'image
             $uploadedFiles = ($request->hasFile('image'))
                 ? Files::uploadFile($request->image)
@@ -108,7 +108,7 @@ class BackofficeController extends Controller
     public function updateSlide(Request $request)
     {
         try {
-            
+
             // Gestion du téléchargement de l'image si une nouvelle image est fournie
             if ($request->hasFile('image')) {
                 if ($request->old_image && $request->old_image !== "default_slide_image.jpg") {
@@ -119,7 +119,7 @@ class BackofficeController extends Controller
                 $name_file = "default_slide_image.jpg";
             }
 
-           $data = [
+            $data = [
                 'id' => $id,
                 'title' => $request->input('title'),
                 'subtitle' => $request->input('subtitle'),
@@ -153,6 +153,186 @@ class BackofficeController extends Controller
             return view('backoffice.addContenuAccueil');
         } catch (\Exception $e) {
             Log::error("Erreur lors de l'ouverture de la page d'ajout de contenu : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    #AJOUT CONTENU DES MEMBRE DE L'EQUIPE
+    public function ajoutEquipe()
+    {
+
+        try {
+            return view('backoffice.addEquipes');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page d'ajout de contenu : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    #AJOUT PARTENAIRE
+    public function ajoutPartenaire()
+    {
+
+        try {
+            return view('backoffice.addPartenaire');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page d'ajout de contenu : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    #PAGE DE SERVICE
+    public function services()
+    {
+        try {
+            return view('backoffice.services');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    public function ajoutService()
+    {
+        try {
+            return view('backoffice.addService');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+
+    #PAGE DE PROJET
+    public function projets()
+    {
+        try {
+            return view('backoffice.projet.index');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    public function ajoutProjet()
+    {
+        try {
+            return view('backoffice.projet.addProjet');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+
+    #PAGE DE CARRIERE / Offre
+    public function offre()
+    {
+        try {
+            return view('backoffice.carriere.index');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    public function ajoutOffre()
+    {
+        try {
+            return view('backoffice.carriere.addOffre');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    public function detailOffre()
+    {
+        try {
+            return view('backoffice.carriere.detailOffre');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de services : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    #PAGE DE MESSAGE
+    public function message()
+    {
+        try {
+            return view('backoffice.message');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page de message : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+
+    #PAGE DE USERS
+    public function listAdministrator()
+    {
+        try {
+            return view('backoffice.users.listAdministrator');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page des administrations : " . $e->getMessage(), [
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->back()
+                ->withInput()
+                ->with('error', __('messages.server_error'));
+        }
+    }
+
+    public function createAdministrator()
+    {
+        try {
+            return view('backoffice.users.createAdministrator');
+        } catch (\Exception $e) {
+            Log::error("Erreur lors de l'ouverture de la page des administrations : " . $e->getMessage(), [
                 'stack_trace' => $e->getTraceAsString(),
             ]);
             return redirect()->back()

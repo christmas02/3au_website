@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Configuration de la Page d'Accueil (Mode Test)</h4>
+                        <h4 class="mb-sm-0">Configuration de la Page d'Accueil</h4>
                     </div>
                 </div>
             </div>
@@ -36,15 +36,13 @@
                             </ul>
                         </div>
 
-                        <form method="POST" action="/update-accueil/1" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
+                        <div class="card-body">
+                            <div class="tab-content text-muted">
 
-                            <div class="card-body">
-                                <div class="tab-content text-muted">
-
-                                    <!-- ONGLET 1 : QUI SOMMES NOUS -->
-                                    <div class="tab-pane active" id="qui-sommes-nous" role="tabpanel">
+                                <!-- ONGLET 1 : QUI SOMMES NOUS -->
+                                <div class="tab-pane active" id="qui-sommes-nous" role="tabpanel">
+                                    <form method="POST" action="/update-accueil/1" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Titre Section 1</label>
@@ -55,21 +53,24 @@
                                                 <input type="text" class="form-control" name="sous_titre_section_one" value="L'expertise au service de votre croissance">
                                             </div>
                                             <div class="col-12 mb-3">
-                                                <label class="form-label">Description (Qui sommes-nous)</label>
-                                                <textarea name="description_section_one" class="form-control summernote" rows="8">
-                                                    <p>Depuis plus de 10 ans, notre cabinet accompagne les entreprises dans leur transformation stratégique. Nous croyons en une approche personnalisée pour chaque client.</p>
-                                                    <ul>
-                                                        <li>Audit et Conseil</li>
-                                                        <li>Gestion de projet</li>
-                                                        <li>Expertise financière</li>
-                                                    </ul>
-                                                </textarea>
+                                                <label class="form-label">Description courte</label>
+                                                <textarea name="description_section_one" class="form-control" rows="4" placeholder="La description ici ..."></textarea>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label class="form-label">Contenu (Qui sommes-nous)</label>
+                                                <textarea name="contenue_section_one" class="form-control summernote" rows="8">Le contenu ici ...</textarea>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- ONGLET 2 : MOT DU DIRECTEUR -->
-                                    <div class="tab-pane" id="mot-directeur" role="tabpanel">
+                                        <div class="mt-4 text-end">
+                                            <button type="submit" class="btn btn-primary px-5">Enregistrer "Qui sommes-nous"</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <!-- ONGLET 2 : MOT DU DIRECTEUR -->
+                                <div class="tab-pane" id="mot-directeur" role="tabpanel">
+                                    <form method="POST" action="/update-accueil/1" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-4 mb-3">
                                                 <label class="form-label">Titre Section 2</label>
@@ -85,10 +86,12 @@
                                             </div>
 
                                             <div class="col-12 mb-4">
+                                                <label class="form-label">Description courte</label>
+                                                <textarea name="description_section_two" class="form-control" rows="4" placeholder="La description ici ..."></textarea>
+                                            </div>
+                                            <div class="col-12 mb-4">
                                                 <label class="form-label">Message du Directeur</label>
-                                                <textarea name="description_section_two" class="form-control summernote" rows="8">
-                                                    <p>"Chers partenaires, notre mission est de bâtir un avenir solide basé sur l'intégrité et l'excellence opérationnelle. Nous sommes fiers de notre parcours et de la confiance que vous nous accordez."</p>
-                                                </textarea>
+                                                <textarea name="contenue_section_two" class="form-control summernote" rows="8">Le contenu ici ...</textarea>
                                             </div>
 
                                             <!-- Photos Section -->
@@ -110,20 +113,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="mt-4 text-end">
+                                            <button type="submit" class="btn btn-primary px-5">Enregistrer "Le mot du Directeur"</button>
+                                        </div>
+                                    </form>
                                 </div>
-
-                            </div> <!-- end tab content -->
-                    </div> <!-- end card body -->
-
-                    <div class="card-footer bg-light text-end">
-                        <button type="submit" class="btn btn-primary px-5">Enregistrer les modifications</button>
-                    </div>
-                    </form>
+                            </div>
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -131,15 +131,9 @@
     function previewImage(input, previewId) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function(e) {
-                // On change la source de l'image avec l'ID correspondant
-                $('#' + previewId).attr('src', e.target.result);
-
-                // Optionnel : Ajouter une petite animation pour montrer le changement
-                $('#' + previewId).hide().fadeIn(650);
+                $('#' + previewId).attr('src', e.target.result).hide().fadeIn(650);
             }
-
             reader.readAsDataURL(input.files[0]);
         }
     }

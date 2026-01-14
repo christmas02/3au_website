@@ -59,7 +59,7 @@ Route::controller(FrontController::class)->group(function () {
 
 #ROUTE BACKOFFICE
 Route::group(['middleware' => 'auth'], function () {
-    
+
     Route::prefix('backoffice')
         ->name('backoffice.')
         ->controller(BackofficeController::class)
@@ -68,12 +68,41 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('accueil', 'accueil')->name('accueil');
             Route::get('ajout/contenu', 'ajoutContenu')->name('ajoutContenu');
             Route::post('enregistrer/article', 'enregistrerArticle')->name('enregistrer.article');
-            Route::get('detail_article/{id}', 'detailArticle')->name('detail.article'); 
+            Route::get('detail_article/{id}', 'detailArticle')->name('detail.article');
 
             Route::get('slider', 'slider')->name('slider');
             Route::post('enregistrer/slide', 'enregistrerSlide')->name('enregistrerSlide');
             Route::get('detailSlide/{id}', 'detailSlide')->name('detailSlide');
             Route::post('updateSlide/{id}', 'updateSlide')->name('updateSlide');
 
+            Route::get('ajout/equipe', 'ajoutEquipe')->name('ajoutEquipe');
+            Route::post('save/equipe', 'saveEquipe')->name('saveEquipe');
+
+            Route::get('ajout/partenaire', 'ajoutPartenaire')->name('ajoutPartenaire');
+            Route::post('save/partenaire', 'savePartenaire')->name('savePartenaire');
+
+            Route::get('services', 'services')->name('services');
+            Route::get('ajout/service', 'ajoutService')->name('ajoutService');
+            Route::get('ajout/TypeService', 'TypeService')->name('ajoutTypeService');
+
+
+            Route::get('projets', 'projets')->name('projets');
+            Route::get('ajout/projet', 'ajoutProjet')->name('ajoutProjet');
+            Route::get('ajout/TypeProjet', 'TypeProjet')->name('TypeProjet');
+
+
+            Route::get('carrieres', 'offre')->name('carriere');
+            Route::get('ajout/offre', 'ajoutOffre')->name('ajoutOffre');
+            Route::get('detail/Offre', 'detailOffre')->name('detailOffre');
+
+            Route::get('messages', 'message')->name('message');
+
+            Route::get('listeAdministrateur', 'listAdministrator')->name('listAdministrator');
+            Route::get('/nouveau/administrateur', 'createAdministrator')->name('createAdministrator');
+
+            Route::post('/save/administrateur', 'saveAdministrator');
+            Route::post('/update/profiluser', 'updateProfilUser');
+            Route::post('/update/changePasswordUser', 'changePasswordUser');
+            Route::post('/update/administrateur', 'updateInfoAdmin');
         });
 });

@@ -170,7 +170,7 @@
                         <div class="card-header border-0 align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Nos Experts / Équipe</h4>
                             <div class="flex-shrink-0">
-                                <a href="/ajout/expert" class="btn btn-success btn-sm">Ajouter un membre</a>
+                                <a href="{{ route('backoffice.ajoutEquipe') }}" class="btn btn-success btn-sm">Ajouter un membre</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -211,7 +211,7 @@
                         <div class="card-header border-0 align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Nos Partenaires</h4>
                             <div class="flex-shrink-0">
-                                <a href="/ajout/partenaire" class="btn btn-success btn-sm">Ajouter un partenaire</a>
+                                <a href="{{ route('backoffice.ajoutPartenaire') }}" class="btn btn-success btn-sm">Ajouter un partenaire</a>
                             </div>
                         </div>
                         <div class="card-body">

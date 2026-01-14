@@ -1,191 +1,137 @@
 @extends('backoffice.layout')
 
 @section('content')
-<!-- Vertical Overlay-->
 <div class="vertical-overlay"></div>
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
 <div class="main-content">
-
     <div class="page-content">
         <div class="container-fluid">
 
-            <!-- start page title -->
+            <!-- TITRE DE LA PAGE -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Ajouter un administrateur</h4>
+                        <h4 class="mb-sm-0">Créer un nouvel administrateur</h4>
+                        <div class="page-title-right">
+                            <a href="{{ route('backoffice.listAdministrator') }}" class="btn btn-soft-dark btn-sm">
+                                <i class="ri-arrow-left-line align-middle me-1"></i> Retour à la liste
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- end page title -->
+
             @include('backoffice.status')
 
-            <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST" action="/save/administrateur" enctype="multipart/form-data">
-                {{ csrf_field() }}
+            <form id="create-admin-form" action="/save/administrateur" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="row">
+                    
+                    <!-- COLONNE GAUCHE : INFORMATIONS PERSONNELLES -->
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card shadow-sm border-top border-primary">
+                            <div class="card-header bg-transparent">
+                                <h5 class="card-title mb-0"><i class="ri-user-settings-line align-middle me-1 text-primary"></i> Informations Personnelles</h5>
+                            </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Nom et Prénom</label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
-                                    @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    <label class="form-label fw-bold">Nom et Prénom</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="ri-user-line"></i></span>
+                                        <input type="text" class="form-control" name="name" placeholder="Ex: Marc-Antoine Traoré" required>
+                                    </div>
+                                    @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Adresse Élèctronique</label>
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                                    @error('email')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    <label class="form-label fw-bold">Adresse Électronique</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="ri-mail-line"></i></span>
+                                        <input type="email" class="form-control" name="email" placeholder="Ex: admin@3au.ci" required>
+                                    </div>
+                                    @error('email') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Numéro de téléphone</label>
-                                    <input type="number" class="form-control" name="phone" value="{{ old('phone') }}" required>
-                                    @error('phone')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                <div class="mb-0">
+                                    <label class="form-label fw-bold">Numéro de téléphone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="ri-phone-line"></i></span>
+                                        <input type="text" class="form-control" name="phone" placeholder="Ex: +225 07 00 00 00 00" required>
+                                    </div>
+                                    @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
                         </div>
-                        <!-- end card -->
                     </div>
-                    <!-- end col -->
 
+                    <!-- COLONNE DROITE : ACCÈS & SÉCURITÉ -->
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card shadow-sm border-top border-success">
+                            <div class="card-header bg-transparent">
+                                <h5 class="card-title mb-0"><i class="ri-lock-password-line align-middle me-1 text-success"></i> Accès & Sécurité</h5>
+                            </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="choices-publish-status-input" class="form-label">Role de l'administrateur</label>
-                                    <select name="role" class="form-select">
-                                        @foreach($roles as $role)
-                                        <option value="{{ $role['value'] }}"> {{ $role['libel'] }} </option>
-                                        @endforeach
+                                    <label class="form-label fw-bold">Rôle de l'administrateur</label>
+                                    <select name="role" class="form-select border-success" required>
+                                        <option value="" selected disabled>Choisir un rôle...</option>
+                                        <option value="1">Super Administrateur</option>
+                                        <option value="2">Administrateur Standard</option>
+                                        <option value="3">Éditeur / Rédacteur</option>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Mot de passe </label>
-                                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" required>
-                                    @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Mot de passe</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="ri-key-2-line"></i></span>
+                                            <input type="password" class="form-control" name="password" placeholder="********" required>
+                                        </div>
+                                        @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Confirmation</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="ri-shield-check-line"></i></span>
+                                            <input type="password" class="form-control" name="password_confirmation" placeholder="********" required>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Confirmation du mot de passe</label>
-                                    <input type="password" class="form-control" name="password_confirmation"  required>
 
+                                <div class="alert alert-soft-info border-0 mb-0">
+                                    <p class="small mb-0">
+                                        <i class="ri-information-line me-1"></i>
+                                        Le mot de passe doit contenir au moins 8 caractères pour garantir la sécurité du compte.
+                                    </p>
                                 </div>
-
-
                             </div>
-                            <!-- end card body -->
-
-
                         </div>
-                        <!-- end card -->
 
-                        <div class="text-end mb-3">
-                            <button type="submit" class="btn btn-success w-sm">Enregistrer</button>
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button type="reset" class="btn btn-soft-danger px-4">Réinitialiser</button>
+                            <button type="submit" class="btn btn-success px-5">
+                                <i class="ri-save-3-line align-bottom me-1"></i> Enregistrer l'administrateur
+                            </button>
                         </div>
                     </div>
-                    <!-- end col -->
                 </div>
-                <!-- end row -->
-
             </form>
 
-
-
         </div>
-        <!-- container-fluid -->
     </div>
-    <!-- End Page-content -->
 
     <footer class="footer">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <script>document.write(new Date().getFullYear())</script> © Velzon.
+                    <script>document.write(new Date().getFullYear())</script> © 3AU.
                 </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end d-none d-sm-block">
-                        Design & Develop by Richkoff
-                    </div>
+                <div class="col-sm-6 text-sm-end">
+                    Tous droits réservés.
                 </div>
             </div>
         </div>
     </footer>
 </div>
-<!-- end main content-->
-
-<div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-light p-3">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter un </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
-            </div>
-            <form class="tablelist-form" autocomplete="off" method="POST" action="/saveCustomer" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <input type="hidden" id="id-field" />
-                    <div class="mb-3">
-                        <label for="customername-field" class="form-label">Entreprise</label>
-                        <input type="text" name="entreprise" id="customername-field" class="form-control" placeholder="Enter name" required />
-                        <div class="invalid-feedback">Please enter a customer name.</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="customername-field" class="form-label">Nom du représentant</label>
-                        <input type="text" name="representant" id="customername-field" class="form-control" placeholder="Enter name" required />
-                        <div class="invalid-feedback">Please enter a customer name.</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email-field" class="form-label">Adresse e-mail</label>
-                        <input type="email" name="email" id="email-field" class="form-control" placeholder="Enter email" required />
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="phone-field" class="form-label">Téléphhone</label>
-                        <input type="text" name="phone" id="phone-field" class="form-control" placeholder="Enter phone no." required />
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="date-field" class="form-label">Adresse localisation</label>
-                        <input type="text" name="adresse" id="date-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" required placeholder="Select date" />
-                        <div class="invalid-feedback">Please select a date.</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="phone-field" class="form-label">Logo de l'entreprise</label>
-                        <input type="file" name="picture" id="phone-field" class="form-control" placeholder="Enter phone no." />
-                        <div class="invalid-feedback">Please enter a phone.</div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-success" id="add-btn">Enregistrer</button>
-                        <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
 @endsection
-
-

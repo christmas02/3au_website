@@ -52,10 +52,10 @@
                             
                             <li class="nav-item">
                                 <a href="{{ route('backoffice.accueil') }}" class="nav-link {{ request()->routeIs('backoffice.accueil') ? 'active' : '' }}" data-key="t-alerts">Accueil</a>
-                                <a href="#" class="nav-link" data-key="t-alerts">Services</a>
-                                <a href="#" class="nav-link" data-key="t-alerts">Projets</a>
-                                <a href="#" class="nav-link" data-key="t-alerts">Carrieres</a>
-                                <a href="#" class="nav-link" data-key="t-alerts">Messageries</a>
+                                <a href="{{ route('backoffice.services') }}" class="nav-link {{ request()->routeIs('backoffice.services') ? 'active' : '' }}" data-key="t-alerts">Services</a>
+                                <a href="{{ route('backoffice.projets') }}" class="nav-link {{ request()->routeIs('backoffice.projets') ? 'active' : '' }}" data-key="t-alerts">Projets</a>
+                                <a href="{{ route('backoffice.carriere') }}" class="nav-link {{ request()->routeIs('backoffice.carriere') ? 'active' : '' }}" data-key="t-alerts">Carrieres</a>
+                                <a href="{{ route('backoffice.message') }}" class="nav-link {{ request()->routeIs('backoffice.message') ? 'active' : '' }}" data-key="t-alerts">Messageries</a>
                             </li>
                             
                         </ul>
@@ -63,7 +63,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a href="#" class="nav-link menu-link" role="button" aria-expanded="false" aria-controls="sidebarUI">
+                    <a href="{{ route('backoffice.listAdministrator') }}" class="nav-link menu-link" role="button" aria-expanded="false" aria-controls="sidebarUI">
                         <i class="ri-account-circle-line"></i> <span data-key=""> <b>Gestion des utilisateurs</b> </span>
                     </a>
 

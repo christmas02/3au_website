@@ -18,9 +18,11 @@ class CreateAcceuilsTable extends Migration
             $table->string('titre_section_one')->nullable();
             $table->string('sous_titre_section_one')->nullable();
             $table->text('description_section_one')->nullable();
+            $table->text('contenue_section_one')->nullable();
             $table->string('titre_section_two')->nullable();
             $table->string('sous_titre_section_two')->nullable();
             $table->text('description_section_two')->nullable();
+            $table->text('contenue_section_two')->nullable();
             $table->string('signature_image_path')->nullable();
             $table->string('nom_signataire')->nullable();
             $table->string('image_directeur')->nullable();
